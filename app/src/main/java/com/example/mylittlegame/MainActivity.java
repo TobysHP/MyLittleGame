@@ -19,12 +19,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // ici on fait en sorte que la barre d'état ne s'affiche pas
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        this.setContentView(new GamePanel(this, new Point(getWindowManager().getDefaultDisplay().getWidth(), getWindowManager().getDefaultDisplay().getHeight())));
 
-        Display display = getWindowManager().getDefaultDisplay();
-
+        //TODO question 1: passer les dimensions de l'écran
+        this.setContentView(new GamePanel(this, new Point(0, 0)));
     }
-
 
 }

@@ -3,33 +3,25 @@ package com.example.mylittlegame;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.graphics.Rect;
-import android.view.WindowManager;
 
 public class BallPlayer implements GameObject{
 
-    private Rect rectangle;
     private Point center;
     private int speedY;
     private int speedX;
     private int radius;
     private int color;
-    private int touchCompt;
 
-    public BallPlayer(Point point, int radius, int color){
-        this.center = point;
-        this.radius = radius;
-        this.color = color;
-        this.speedY = 0;
-        this.speedX = 0;
-        touchCompt = 0;
+    public BallPlayer(){
+        //TODO question 2 : compléter le constructeur
     }
 
     @Override
     public void draw(Canvas canvas) {
         Paint paint = new Paint();
         paint.setColor(color);
-        canvas.drawCircle(center.x, center.y, radius, paint);
+
+        //TODO question 3 : dessiner un cercle avec la fonction canvas.drawCircle()
     }
 
     @Override
@@ -38,43 +30,21 @@ public class BallPlayer implements GameObject{
     }
 
     public void update(int cas, Point point){
-        switch (cas){
-            case 1: // gauche
-                speedX = -speedX;
-                break;
-            case 2: // haut
-                speedY = -speedY;
-                break;
-            case 3: // droite
-                speedX = -speedX;
-                break;
-            case 4: // bas
-                speedY = -speedY;
-                break;
-        }
+        //TODO question 4 : donner une physique simple à la balle
 
-        if(isInCircle(point) && touchCompt == 0){
-            speedX += -speedX + 15 * (center.x - point.x)/radius;
-            speedY = -speedY + 5 * (center.y - point.y)/radius;
-            touchCompt = 3;
-        }
+        //TODO question 5 : gérer les collisions
 
-        speedY = 1 + speedY;
-        center.y = speedY + center.y;
-        System.out.println(speedX);
-        center.x = speedX + center.x;
-
-        if(touchCompt > 0)
-            touchCompt --;
-
+        //TODO question 6 : taper la balle
     }
 
     public Point getUpLeft(){
-        return new Point(center.x - radius, center.y - radius);
+        //TODO question 5: récupérer le point supérieur gauche du rectangle qui encadre la balle
+        return null;
     }
 
     public Point getDownRight(){
-        return new Point(center.x + radius, center.y + radius);
+        //TODO question 5: récupérer le point inférieur droit du rectangle qui encadre la balle
+        return null;
     }
 
     public int getDirX(){
@@ -96,9 +66,7 @@ public class BallPlayer implements GameObject{
     }
 
     public boolean isInCircle(Point point){
-        if(Math.sqrt(Math.pow((center.x - point.x), 2)+Math.pow((center.y - point.y),2))<radius)
-            return true;
-        else
-            return false;
+        //TODO dire si le point fait parti du cercle
+        return true;
     }
 }

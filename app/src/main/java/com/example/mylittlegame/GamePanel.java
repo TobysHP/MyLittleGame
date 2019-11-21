@@ -19,18 +19,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     public GamePanel(Context context, Point limit) {
         super(context);
-
         getHolder().addCallback(this);
-
         thread = new MainThread(getHolder(), this);
-
-        playerPoint = new Point(150, 150);
-
-        player = new BallPlayer(new Point(400, 400), 100, Color.rgb(255,0,0));
-
-        this.limit = limit;
-
         setFocusable(true);
+
+        //TODO question 1: récupérer la taille de l'écran et l'enregister dans la variable limit
+
+        //TODO question 2: créer un joueur
     }
 
     public GamePanel(Context context, AttributeSet attrs) {
@@ -48,7 +43,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         thread = new MainThread(getHolder(), this);
-
         thread.setRunning(true);
         thread.start();
     }
@@ -73,47 +67,30 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()){
-            case MotionEvent.ACTION_UP:
-                playerPoint.set(0, 0);
-                System.out.println("release");
+            case MotionEvent.ACTION_UP: // quand on lache l'écran
+                //TODO question 6: taper la balle
                 break;
-            case MotionEvent.ACTION_DOWN:
-                playerPoint.set((int)event.getX(), (int)event.getY());
-                System.out.println("press");
+            case MotionEvent.ACTION_DOWN: // quand on appuie sur l'écran
+                //TODO question 6: taper la balle
                 break;
         }
-
         return true;
-        //return super.onTouchEvent(event);
     }
 
     public void update(){
-        player.update(collision(player.getUpLeft(), player.getDownRight(), player.getDirY(), player.getDirX()), playerPoint);
+        //TODO question 4: update la balle
     }
 
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-
         canvas.drawColor(Color.WHITE);
 
-
-        player.draw(canvas);
+        //TODO question 3: dessiner la balle
     }
 
-    public int collision(Point upLeft, Point downRight, int dirY, int dirX){
-        if (upLeft.y <= 0 && dirY == -1)
-            return 2;
-        else if (downRight.y >= limit.y && dirY == 1)
-            return 4;
-        else if(upLeft.x <= 0 && dirX == -1)
-            return 1;
-        else if(downRight.x >= limit.x && dirX == 1)
-            return 3;
-        else
-            return 0;
-
-
-        // 0: /  || 1: g || 2: h || 3: d || 4: b
+    public int collision(){
+        //TODO question 5: gérer les collisions avec les murs. return 0, 1, 2, 3 ou 4 selon le mur
+        return 0;
     }
 }
