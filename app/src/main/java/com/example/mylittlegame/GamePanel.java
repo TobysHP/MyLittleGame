@@ -3,6 +3,7 @@ package com.example.mylittlegame;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.util.AttributeSet;
@@ -26,7 +27,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         playerPoint = new Point(150, 150);
 
-        player = new BallPlayer(new Point(400, 400), 100, Color.rgb(255,0,0));
+        player = new BallPlayer(new Point(limit.x/2, limit.y/2), 100, Color.rgb(255,0,0));
 
         this.limit = limit;
 
@@ -75,11 +76,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         switch (event.getAction()){
             case MotionEvent.ACTION_UP:
                 playerPoint.set(0, 0);
-                System.out.println("release");
                 break;
             case MotionEvent.ACTION_DOWN:
                 playerPoint.set((int)event.getX(), (int)event.getY());
-                System.out.println("press");
                 break;
         }
 
@@ -99,6 +98,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
 
         player.draw(canvas);
+        Paint paint = new Paint();
+        paint.setColor(Color.BLACK);
+        paint.setTextSize(100);
+        canvas.drawText("SCORE:" + player.getScore(), 10, 100, paint);
+        canvas.drawText("BEST:" + player.getBestScore(), 10, 200, paint);
     }
 
     public int collision(Point upLeft, Point downRight, int dirY, int dirX){

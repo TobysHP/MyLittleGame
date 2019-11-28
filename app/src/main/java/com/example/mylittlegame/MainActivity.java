@@ -22,8 +22,6 @@ public class MainActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         this.setContentView(new GamePanel(this, new Point(getWindowManager().getDefaultDisplay().getWidth(), getWindowManager().getDefaultDisplay().getHeight())));
 
-        Display display = getWindowManager().getDefaultDisplay();
-
     }
 
 
