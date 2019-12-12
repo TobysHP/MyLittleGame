@@ -4,7 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 
-public class BallPlayer implements GameObject{
+public class BallPlayer implements GameObject  {
 
     private Point initPos;
     private Point center;
@@ -41,7 +41,7 @@ public class BallPlayer implements GameObject{
 
     }
 
-    public void update(int cas, Point point){
+    public void update(int cas, Point point, int x , int y){
         System.out.println(this.initPos);
         switch (cas){
             case 1: // gauche
@@ -65,8 +65,16 @@ public class BallPlayer implements GameObject{
             score++;
         }
 
+        // LOI D'ACCELERATION NATURELLE
 
-        speedY = 1 + speedY;
+        y -= 5;
+        speedY = speedY + y;
+        speedX = speedX - x;
+
+
+        //speedY = 1 + speedY;
+        // FIN
+
         center.y = speedY + center.y;
         center.x = speedX + center.x;
 

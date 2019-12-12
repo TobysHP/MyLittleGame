@@ -15,8 +15,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private MainThread thread;
 
     private BallPlayer player;
+    private Obstacle obstacle;
     private Point playerPoint;
     private Point limit;
+    float captX,captY;
 
     public GamePanel(Context context, Point limit) {
         super(context);
@@ -28,7 +30,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         playerPoint = new Point(150, 150);
 
         player = new BallPlayer(new Point(limit.x/2, limit.y/2), 100, Color.rgb(255,0,0));
-
+        obstacle = new Obstacle(new Point(0,-20),200,Color.rgb(0,0,255));
         this.limit = limit;
 
         setFocusable(true);
@@ -87,7 +89,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void update(){
-        player.update(collision(player.getUpLeft(), player.getDownRight(), player.getDirY(), player.getDirX()), playerPoint);
+       obstacle.update();
+        player.update(collision(player.getUpLeft(), player.getDownRight(), player.getDirY(), player.getDirX()), playerPoint,(int) captX, (int) captY );
     }
 
     @Override
@@ -96,6 +99,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         canvas.drawColor(Color.WHITE);
 
+        obstacle.draw(canvas);
 
         player.draw(canvas);
         Paint paint = new Paint();
@@ -120,4 +124,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         // 0: /  || 1: g || 2: h || 3: d || 4: b
     }
+
+    public void capteur (float x , float y)
+    {
+
+        captX = x ;
+        captY = y ;
+    }
+
+
+
 }
